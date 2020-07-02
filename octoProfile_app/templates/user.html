@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./../static/images/favicon.ico">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.1/css/all.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    <script>
+        var endpoint = '/api/chart/data/'
+        var defaultData = []
+        var labels = [];
+        $.ajax({
+            method: "GET",
+            url: endpoint,
+            success: function (data) {
+                labels = data.labels
+                defaultData = data.default
+                setChart()
+            },
+            error: function (error_data) {
+                console.log("error")
+                console.log(error_data)
+            }
+        })
+
+        function setChart() {
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '# of Votes',
+                        data: defaultData,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+            var ctx2 = document.getElementById("myChart2");
+            var myChart = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '# of Votes',
+                        data: defaultData,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+
+            var ctx3 = document.getElementById("myChart3");
+            var myChart = new Chart(ctx3, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '# of Votes',
+                        data: defaultData,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+    </script>
+
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/user.css' %}">
+    <title>OctoProfile | {{data.login}}</title>
+</head>
+
+<body class="bg-light">
+
+    <div class="wrapper">
+        <div class="header">
+            <div class="corner">
+                <h4>{{limit_data.resources.core.remaining}} / {{limit_data.resources.core.limit}}</h4>
+                <div>REQUESTS LEFT</div>
+            </div>
+            <div class="profile text-center">
+                <img src="{{data.avatar_url}}" class="border-primary" alt="profile-image">
+
+                {% if data.name %}
+                <h1>{{data.name}}</h1>
+                {% endif %}
+                <p class="username text-primary">
+                    <a href="https://github.com/{{data.login}}" target="_blank">@{{data.login}}</a>
+                </p>
+                <p style="color: #c8e1ff;">
+                    {% if data.location %}
+                    <i class="fal fa-map-marker-alt"></i> {{data.location}}
+                    {% endif %}
+                    <i class="far fa-calendar-alt"></i> Join {{created_at}}
+                </p>
+
+                <ul>
+                    <li>
+                        <div class="main">{{data.public_repos}}</div>
+                        <div class="sub">REPOSITORIES</div>
+                    </li>
+                    <li>
+                        <div class="main">{{data.followers}}</div>
+                        <div class="sub">FOLLOWERS</div>
+                    </li>
+                    <li>
+                        <div class="main">{{data.following}}</div>
+                        <div class="sub">FOLLOWING</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content container">
+            <div class="card-deck">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h4 class="card-title">Top Languages</h4>
+                        <div class="line"></div>
+                        <p class="card-text">
+                            <canvas id="myChart" width="150" height="150"></canvas>
+                        </p>
+                    </div>
+                </div>
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h4 class="card-title">Most Starred</h4>
+                        <div class="line"></div>
+                        <p class="card-text"><canvas id="myChart2" width="150" height="150"></canvas></p>
+                    </div>
+                </div>
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h4 class="card-title">Stars per Language
+                        </h4>
+                        <div class="line"></div>
+                        <p class="card-text"><canvas id="myChart3" width="150" height="150">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="repos container-fluid">
+            <div class="top-repo justify-content-around">
+                <label for="top-repos" class="col-sm-3 col-form-label">Top
+                    Repos <span>by </span></label>
+                <select class="custom-select bg-light text-primary" id="type">
+                    <option selected="stars">stars</option>
+                    <option value="forks">forks</option>
+                    <option value="size">size</option>
+                </select>
+            </div>
+            <div class="repo-info ">
+                <!-- Sort by stars -->
+                <div class="stars">
+                    <div class="card-deck justify-content-center">
+                        {% for repo in sorted_by_stars %}
+                        <a href="{{repo.html_url}}" class="text-dark" target="_blank">
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    <h4 class="card-title" style="font-family: 'Space Mono', monospace;">
+                                        <span><i class="fal fa-book"></i></span> {{repo.name}}</h4>
+                                    <p class="card-text clearfix">
+                                        <i class="fas fa-circle"></i>
+                                        {% if repo.language %}
+                                        <span> {{repo.language}}</span>
+                                        {% endif %}
+                                        <i class="fas fa-star"></i> {{repo.stargazers_count}}
+                                        <i class="fal fa-code-branch"></i> {{repo.forks}}
+                                        {% load humanize %}
+                                        <span class="float-right">{{repo.size|intcomma}} KB</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="forks">
+                    <!-- Sort by forks -->
+                    <div class="card-deck justify-content-center">
+                        {% for repo in sorted_by_forks %}
+                        <a href="{{repo.html_url}}" class="text-dark" target="_blank">
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    <h4 class="card-title" style="font-family: 'Space Mono', monospace;">
+                                        <span><i class="fal fa-book"></i></span> {{repo.name}}</h4>
+                                    <p class="card-text clearfix">
+                                        <i class="fas fa-circle"></i>
+                                        {% if repo.language %}
+                                        <span> {{repo.language}}</span>
+                                        {% endif %}
+                                        <i class="fas fa-star"></i> {{repo.stargazers_count}}
+                                        <i class="fal fa-code-branch"></i> {{repo.forks}}
+                                        {% load humanize %}
+                                        <span class="float-right">{{repo.size|intcomma}} KB</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="size">
+                    <!-- Sort by size -->
+                    <div class="card-deck justify-content-center">
+                        {% for repo in sorted_by_size %}
+                        <a href="{{repo.html_url}}" class="text-dark" target="_blank">
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    <h4 class="card-title" style="font-family: 'Space Mono', monospace;">
+                                        <span><i class="fal fa-book"></i></span> {{repo.name}}</h4>
+                                    <p class="card-text clearfix">
+                                        <i class="fas fa-circle"></i>
+                                        {% if repo.language %}
+                                        <span> {{repo.language}}</span>
+                                        {% endif %}
+                                        <i class="fas fa-star"></i> {{repo.stargazers_count}}
+                                        <i class="fal fa-code-branch"></i> {{repo.forks}}
+                                        {% load humanize %}
+                                        <span class="float-right">{{repo.size|intcomma}} KB</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer text-center container">
+        <p>Built with <a href="">Python</a> · <a href="">Chart.js</a> · <a href="">GitHub</a> · <a href="">Django</a>
+            and
+            more!</p>
+    </div>
+
+
+    <!-- jQuery -->
+    <script>
+        $(document).ready(function () {
+            $(".stars").show();
+            $(".forks").hide();
+            $(".size").hide();
+
+            $("#type").change(function () {
+                var val = $(this).val();
+                if (val == "stars") {
+                    $(".stars").show();
+                    $(".forks").hide();
+                    $(".size").hide();
+                } else if (val == "forks") {
+                    $(".stars").hide();
+                    $(".forks").show();
+                    $(".size").hide();
+                } else if (val == "size") {
+                    $(".stars").hide();
+                    $(".forks").hide();
+                    $(".size").show();
+                }
+            });
+        });
+    </script>
+
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
