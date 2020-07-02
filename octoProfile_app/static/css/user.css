@@ -4,6 +4,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
+    background-color: #F5F8FA !important;
 }
 
 .corner h4 {
@@ -109,6 +110,8 @@ ul li .sub {
 .top-repo select {
     width: 100px;
     display: inline-block;
+    background-color: #F5F8FA !important;
+    border: 1px solid #CCE0FB;
 }
 
 .top-repo h4 {
@@ -125,12 +128,12 @@ ul li .sub {
 
 }
 
-.repos .card-body span {
-    font-size: 17px;
+.repos .card-title span {
+    font-size: 14px;
 }
 
 .repos .repo-info h4 {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .repos a {
@@ -140,6 +143,7 @@ ul li .sub {
 .repos p {
     font-weight: 400;
     font-size: 13px;
+
     color: #6a737d;
 }
 

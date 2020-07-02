@@ -24,12 +24,6 @@ def searchUser(req):
     return redirect(f'/{username}')
 
 
-def get_stars(username):
-    with urlopen(f'https://api.github.com/users/{username}/repos') as response:
-        source = response.read()
-    return json.loads(source)
-
-
 def user(req, username):
     username = str.lower(username)
 
@@ -74,6 +68,9 @@ def user(req, username):
     created_at = datetime.datetime.strptime(created_at, "%Y-%m-%dT%H:%M:%SZ")
     created_at = created_at.strftime("%B %d, %Y")
 
+    labels = ['a', 'b', 'c', 'd', 'e']
+    values = [0, 0, 0, 0, 0]
+
     context = {
         'username': username,
         'data': data,
@@ -83,7 +80,10 @@ def user(req, username):
         'sorted_by_forks': sorted_by_forks[:8],
         'sorted_by_size': sorted_by_size[:8],
     }
-    return render(req, 'user.html', context)
+    return render(req, 'user.html', context, {
+        'x': json.dumps(labels),
+        'y': json.dumps(values),
+    })
 
 
 class ChartData(APIView):

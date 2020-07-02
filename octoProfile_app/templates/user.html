@@ -39,14 +39,16 @@
         })
 
         function setChart() {
+            let x = ['a', 'b', 'c', 'd', 'e'];
+            let y = [0, 0, 0, 0, 0];
             var ctx = document.getElementById("myChart");
             var myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: labels,
+                    labels: x,
                     datasets: [{
                         label: '# of Votes',
-                        data: defaultData,
+                        data: y,
                         backgroundColor: [
                             'rgba(255, 99, 132, 1)',
                             'rgba(54, 162, 235, 1)',
@@ -86,12 +88,12 @@
                         label: '# of Votes',
                         data: defaultData,
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
+                            'rgba(255, 99, 132, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(255, 206, 86, 0.8)',
+                            'rgba(75, 192, 192, 0.8)',
+                            'rgba(153, 102, 255, 0.8)',
+                            'rgba(255, 159, 64, 0.8)'
                         ],
                         borderColor: [
                             'rgba(255,99,132,1)',
@@ -162,7 +164,7 @@
     <title>OctoProfile | {{data.login}}</title>
 </head>
 
-<body class="bg-light">
+<body>
 
     <div class="wrapper">
         <div class="header">
@@ -253,9 +255,36 @@
                                     <h4 class="card-title" style="font-family: 'Space Mono', monospace;">
                                         <span><i class="fal fa-book"></i></span> {{repo.name}}</h4>
                                     <p class="card-text clearfix">
+
+                                        <!-- Color -->
+                                        {% if repo.language == "HTML" %}
+                                        <i class="fas fa-circle" style="color: #E44B22;"></i>
+                                        {% elif repo.language == "CSS" %}
+                                        <i class="fas fa-circle" style="color: #563d7c;"></i>
+                                        {% elif repo.language == "TypeScript" %}
+                                        <i class="fas fa-circle" style="color: #2b7489;"></i>
+                                        {% elif repo.language == "PHP" %}
+                                        <i class="fas fa-circle" style="color: #4F5D95;"></i>
+                                        {% elif repo.language == "JavaScript" %}
+                                        <i class="fas fa-circle" style="color: #f1e05a;"></i>
+                                        {% elif repo.language == "Python" %}
+                                        <i class="fas fa-circle" style="color: #3572A5;"></i>
+                                        {% elif repo.language == "Objective-C++" %}
+                                        <i class="fas fa-circle" style="color: #6866fb;"></i>
+                                        {% elif repo.language == "Objective-C" %}
+                                        <i class="fas fa-circle" style="color: #438eff;"></i>
+                                        {% elif repo.language == "Java" %}
+                                        <i class="fas fa-circle" style="color: #b07219;"></i>
+                                        {% elif repo.language == "Ruby" %}
+                                        <i class="fas fa-circle" style="color: #701516;"></i>
+                                        {% else %}
                                         <i class="fas fa-circle"></i>
+                                        {% endif %}
+                                        <!-- End Color -->
+
+
                                         {% if repo.language %}
-                                        <span> {{repo.language}}</span>
+                                        <span>{{repo.language}}</span>
                                         {% endif %}
                                         <i class="fas fa-star"></i> {{repo.stargazers_count}}
                                         <i class="fal fa-code-branch"></i> {{repo.forks}}
@@ -279,7 +308,33 @@
                                     <h4 class="card-title" style="font-family: 'Space Mono', monospace;">
                                         <span><i class="fal fa-book"></i></span> {{repo.name}}</h4>
                                     <p class="card-text clearfix">
+
+                                        <!-- Color -->
+                                        {% if repo.language == "HTML" %}
+                                        <i class="fas fa-circle" style="color: #E44B22;"></i>
+                                        {% elif repo.language == "CSS" %}
+                                        <i class="fas fa-circle" style="color: #563d7c;"></i>
+                                        {% elif repo.language == "TypeScript" %}
+                                        <i class="fas fa-circle" style="color: #2b7489;"></i>
+                                        {% elif repo.language == "PHP" %}
+                                        <i class="fas fa-circle" style="color: #4F5D95;"></i>
+                                        {% elif repo.language == "JavaScript" %}
+                                        <i class="fas fa-circle" style="color: #f1e05a;"></i>
+                                        {% elif repo.language == "Python" %}
+                                        <i class="fas fa-circle" style="color: #3572A5;"></i>
+                                        {% elif repo.language == "Objective-C++" %}
+                                        <i class="fas fa-circle" style="color: #6866fb;"></i>
+                                        {% elif repo.language == "Objective-C" %}
+                                        <i class="fas fa-circle" style="color: #438eff;"></i>
+                                        {% elif repo.language == "Java" %}
+                                        <i class="fas fa-circle" style="color: #b07219;"></i>
+                                        {% elif repo.language == "Ruby" %}
+                                        <i class="fas fa-circle" style="color: #701516;"></i>
+                                        {% else %}
                                         <i class="fas fa-circle"></i>
+                                        {% endif %}
+                                        <!-- End Color -->
+
                                         {% if repo.language %}
                                         <span> {{repo.language}}</span>
                                         {% endif %}
@@ -305,7 +360,33 @@
                                     <h4 class="card-title" style="font-family: 'Space Mono', monospace;">
                                         <span><i class="fal fa-book"></i></span> {{repo.name}}</h4>
                                     <p class="card-text clearfix">
+
+                                        <!-- Color -->
+                                        {% if repo.language == "HTML" %}
+                                        <i class="fas fa-circle" style="color: #E44B22;"></i>
+                                        {% elif repo.language == "CSS" %}
+                                        <i class="fas fa-circle" style="color: #563d7c;"></i>
+                                        {% elif repo.language == "TypeScript" %}
+                                        <i class="fas fa-circle" style="color: #2b7489;"></i>
+                                        {% elif repo.language == "PHP" %}
+                                        <i class="fas fa-circle" style="color: #4F5D95;"></i>
+                                        {% elif repo.language == "JavaScript" %}
+                                        <i class="fas fa-circle" style="color: #f1e05a;"></i>
+                                        {% elif repo.language == "Python" %}
+                                        <i class="fas fa-circle" style="color: #3572A5;"></i>
+                                        {% elif repo.language == "Objective-C++" %}
+                                        <i class="fas fa-circle" style="color: #6866fb;"></i>
+                                        {% elif repo.language == "Objective-C" %}
+                                        <i class="fas fa-circle" style="color: #438eff;"></i>
+                                        {% elif repo.language == "Java" %}
+                                        <i class="fas fa-circle" style="color: #b07219;"></i>
+                                        {% elif repo.language == "Ruby" %}
+                                        <i class="fas fa-circle" style="color: #701516;"></i>
+                                        {% else %}
                                         <i class="fas fa-circle"></i>
+                                        {% endif %}
+                                        <!-- End Color -->
+
                                         {% if repo.language %}
                                         <span> {{repo.language}}</span>
                                         {% endif %}
