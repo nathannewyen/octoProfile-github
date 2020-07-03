@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700;0,500;0,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 
 body {
@@ -98,7 +98,7 @@ ul li .sub {
     font-weight: 500;
     display: inline-block;
     width: 200px;
-    margin-left: 70px;
+    margin-left: 6%;
 }
 
 .top-repo span {
@@ -116,7 +116,6 @@ ul li .sub {
 
 .top-repo h4 {
     font-family: 'Space Mono', monospace;
-    margin-left: 40px;
 }
 
 .repos .card {

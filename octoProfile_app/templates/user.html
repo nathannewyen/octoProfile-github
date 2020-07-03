@@ -20,10 +20,8 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
-    <script>
+    <script type="text/javascript">
         var endpoint = '/api/chart/data/'
-        var defaultData = []
-        var labels = [];
         $.ajax({
             method: "GET",
             url: endpoint,
@@ -39,13 +37,12 @@
         })
 
         function setChart() {
-            let x = ['a', 'b', 'c', 'd', 'e'];
-            let y = [0, 0, 0, 0, 0];
+            let y = [10, 3, 5, 9, 1];
             var ctx = document.getElementById("myChart");
             var myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: x,
+                    labels: labels,
                     datasets: [{
                         label: '# of Votes',
                         data: y,
@@ -79,6 +76,8 @@
                 }
             });
 
+            var value_chart = JSON.parse("{{value_chart|escapejs}}");
+            console.log(value_chart);
             var ctx2 = document.getElementById("myChart2");
             var myChart = new Chart(ctx2, {
                 type: 'bar',
@@ -86,7 +85,7 @@
                     labels: labels,
                     datasets: [{
                         label: '# of Votes',
-                        data: defaultData,
+                        data: value_chart,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.8)',
                             'rgba(54, 162, 235, 0.8)',
@@ -278,7 +277,7 @@
                                         {% elif repo.language == "Ruby" %}
                                         <i class="fas fa-circle" style="color: #701516;"></i>
                                         {% else %}
-                                        <i class="fas fa-circle"></i>
+                                        <i class="fas fa-circle"></i> None
                                         {% endif %}
                                         <!-- End Color -->
 
@@ -331,7 +330,7 @@
                                         {% elif repo.language == "Ruby" %}
                                         <i class="fas fa-circle" style="color: #701516;"></i>
                                         {% else %}
-                                        <i class="fas fa-circle"></i>
+                                        <i class="fas fa-circle"></i> None
                                         {% endif %}
                                         <!-- End Color -->
 
@@ -383,7 +382,7 @@
                                         {% elif repo.language == "Ruby" %}
                                         <i class="fas fa-circle" style="color: #701516;"></i>
                                         {% else %}
-                                        <i class="fas fa-circle"></i>
+                                        <i class="fas fa-circle"></i> None
                                         {% endif %}
                                         <!-- End Color -->
 
@@ -424,7 +423,7 @@
                 var val = $(this).val();
                 if (val == "stars") {
                     $(".stars").show();
-                    $(".forks").hide();
+                    $(".forks").hide()
                     $(".size").hide();
                 } else if (val == "forks") {
                     $(".stars").hide();

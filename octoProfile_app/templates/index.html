@@ -2,17 +2,23 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./../static/images/favicon.ico">
+    <link rel="icon" type="image/png" href="./../static/images/favicon.ico" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.1/css/all.css">
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.1/css/all.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    <script type="text/javascript">
+        var endpoint = "/api/chart/data/";
+        var data = JSON.parse("{{data|escapejs}}");
+        console.log(data);
+    </script>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
     <title>OctoProfile</title>
 </head>
 
@@ -22,11 +28,36 @@
             {% csrf_token %}
             <i class="fab fa-github text-primary"></i>
             <h1>Find Your OctoProfile</h1>
-            <input name="username" type="text" class="form-control border-0" placeholder="Enter your github username">
+            <input name="username" type="text" class="form-control border-0" placeholder="Enter your github username" />
         </form>
     </div>
-
     <!-- Bootstrap -->
+
+    <script>
+        $(document).ready(function () {
+            $(".stars").show();
+            $(".forks").hide();
+            $(".size").hide();
+
+            $("#type").change(function () {
+                var val = $(this).val();
+                if (val == "stars") {
+                    $(".stars").show();
+                    $(".forks").hide();
+                    $(".size").hide();
+                } else if (val == "forks") {
+                    $(".stars").hide();
+                    $(".forks").show();
+                    $(".size").hide();
+                } else if (val == "size") {
+                    $(".stars").hide();
+                    $(".forks").hide();
+                    $(".size").show();
+                }
+            });
+        });
+    </script>
+
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
