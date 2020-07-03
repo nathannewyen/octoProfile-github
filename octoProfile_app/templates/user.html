@@ -75,16 +75,15 @@
                     }
                 }
             });
-
-            var value_chart = JSON.parse("{{value_chart|escapejs}}");
-            console.log(value_chart);
+            let data_labels = JSON.parse(`{{ labels_chart | safe}}`);
+            let value_chart = JSON.parse("{{value_chart|escapejs}}");
             var ctx2 = document.getElementById("myChart2");
             var myChart = new Chart(ctx2, {
                 type: 'bar',
                 data: {
-                    labels: labels,
+                    labels: data_labels,
                     datasets: [{
-                        label: '# of Votes',
+                        label: '# of Starred',
                         data: value_chart,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.8)',
@@ -277,8 +276,7 @@
                                         {% elif repo.language == "Ruby" %}
                                         <i class="fas fa-circle" style="color: #701516;"></i>
                                         {% else %}
-                                        <i class="fas fa-circle"></i> None
-                                        {% endif %}
+                                        <i class="fas fa-circle" style="color: #1402FF"></i> None {% endif %}
                                         <!-- End Color -->
 
 
@@ -330,7 +328,7 @@
                                         {% elif repo.language == "Ruby" %}
                                         <i class="fas fa-circle" style="color: #701516;"></i>
                                         {% else %}
-                                        <i class="fas fa-circle"></i> None
+                                        <i class="fas fa-circle" style="color: #1402FF"></i> None
                                         {% endif %}
                                         <!-- End Color -->
 
@@ -382,8 +380,7 @@
                                         {% elif repo.language == "Ruby" %}
                                         <i class="fas fa-circle" style="color: #701516;"></i>
                                         {% else %}
-                                        <i class="fas fa-circle"></i> None
-                                        {% endif %}
+                                        <i class="fas fa-circle" style="color: #1402FF"></i> None {% endif %}
                                         <!-- End Color -->
 
                                         {% if repo.language %}

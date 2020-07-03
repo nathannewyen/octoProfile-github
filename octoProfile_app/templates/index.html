@@ -12,11 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
-    <script type="text/javascript">
-        var endpoint = "/api/chart/data/";
-        var data = JSON.parse("{{data|escapejs}}");
-        console.log(data);
-    </script>
+
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
     <title>OctoProfile</title>

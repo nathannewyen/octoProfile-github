@@ -1,12 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.http import JsonResponse
 from urllib.request import urlopen
+from django.http import HttpResponseForbidden
 
 from django.core import serializers
 from json import dumps
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.core.exceptions import PermissionDenied
 
 import json
 import datetime
@@ -18,11 +20,7 @@ User = get_user_model()
 
 
 def index(req):
-    labels = ['data', 'hello', 'wassup']
-    values = []
-    dataJSON = dumps(labels)
-
-    return render(req, 'index.html', {'data': dataJSON})
+    return render(req, 'index.html')
 
 
 def searchUser(req):
@@ -59,12 +57,18 @@ def user(req, username):
 
     sorted_by_stars.sort(key=sort_user_repo_by_stars, reverse=True)
 
+    def labels_chart(sorted_by_stars):
+        labels = []
+        for i in sorted_by_stars:
+            labels.append(i['name'])
+        labelJSON = dumps(labels)
+        return labelJSON
+
     def value_chart(sorted_by_stars):
         values = []
         for i in sorted_by_stars:
             values.append(i['stargazers_count'])
         return values
-    print(value_chart(sorted_by_stars)[:5])
 
     # Sorted by forks
 
@@ -91,8 +95,10 @@ def user(req, username):
         'sorted_by_stars': sorted_by_stars[:8],
         'sorted_by_forks': sorted_by_forks[:8],
         'sorted_by_size': sorted_by_size[:8],
-        'value_chart': value_chart(sorted_by_forks)[:5],
+        'value_chart': value_chart(sorted_by_stars)[:5],
+        'labels_chart': labels_chart(sorted_by_stars[:5]),
     }
+
     return render(req, 'user.html', context)
 
 
