@@ -37,6 +37,20 @@
         })
 
         function setChart() {
+            Chart.plugins.register({
+                beforeInit: function (chart) {
+                    var data = chart.data.datasets[0].data;
+                    var isAllZero = data.reduce((a, b) => a + b) > 0 ? false : true;
+                    if (!isAllZero) return;
+                    // when all data values are zero...
+                    chart.data.datasets[0].data = data.map((e, i) => i > 0 ? 0 : 1); //add one segment
+                    chart.data.datasets[0].backgroundColor = '#d2dee2'; //change bg color
+                    chart.data.datasets[0].borderWidth = 0; //no border
+                    chart.options.tooltips = false; //disable tooltips
+                    chart.options.legend.onClick = null; //disable legend click
+                }
+            });
+
             let labels_most_forked = JSON.parse(`{{ labels_most_forked | safe}}`);
             let values_most_forked = JSON.parse(`{{ values_most_forked | safe}}`);
             var ctx = document.getElementById("myChart");
@@ -67,12 +81,11 @@
                     }]
                 },
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
                     legend: {
-                        position: 'right'
-                    }
-                },
-                tooltips: {
-                    mode: 'label'
+                    position: 'right',
+                    },
                 },
             });
             let data_labels = JSON.parse(`{{ labels_chart | safe}}`);
@@ -105,6 +118,8 @@
                     }]
                 },
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
                     scales: {
                         yAxes: [{
                             ticks: {
@@ -113,7 +128,7 @@
                         }]
                     },
                     legend: {
-                        display: false
+                        display: false,
                     },
                     tooltips: {
                         callbacks: {
@@ -155,8 +170,11 @@
                     }]
                 },
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
                     legend: {
                         position: 'right',
+                        verticalAlign: 'top',
                     },
                 }
             });
@@ -214,23 +232,26 @@
             <div class="card-deck">
                 <div class="card shadow">
                     <div class="card-body">
-                        <h4 class="card-title">Most Forked</h4>
-                        <div class="line"></div>
-                        <canvas id="myChart"></canvas>
+                        <h4 class="card-title">Most Forked
+                            <div class="line"></div>
+                        </h4>
+                        <canvas id="myChart" width="300" height="300"></canvas>
                     </div>
                 </div>
                 <div class="card shadow">
                     <div class="card-body">
-                        <h4 class="card-title">Most Starred</h4>
-                        <div class="line"></div>
-                        <canvas id="myChart2" width="150" height="150"></canvas>
+                        <h4 class="card-title">Most Starred
+                            <div class="line"></div>
+                        </h4>
+                        <canvas id="myChart2" width="300" height="300"></canvas>
                     </div>
                 </div>
                 <div class="card shadow">
                     <div class="card-body">
-                        <h4 class="card-title">Most sizes</h4>
-                        <div class="line"></div>
-                        <canvas id="myChart3" width="150" height="150">
+                        <h4 class="card-title">Most Sizes
+                            <div class="size-line"></div>
+                        </h4>
+                        <canvas id="myChart3" width="300" height="300">
                     </div>
                 </div>
             </div>
