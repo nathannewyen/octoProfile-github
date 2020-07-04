@@ -67,6 +67,11 @@ ul li .sub {
 
 /* Content */
 
+.content {
+  width: 80% !important;
+  margin: 0 auto;
+}
+
 .card .line {
   border-top: 2px dashed #d1d5d9;
   width: 150px !important;
@@ -130,6 +135,7 @@ canvas {
 .repos .repo-info h4 {
   font-size: 18px;
 }
+
 
 .repos a {
   text-decoration: none;

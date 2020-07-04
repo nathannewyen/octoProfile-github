@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.http import JsonResponse
 from urllib.request import urlopen
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, Http404
 
 from django.core import serializers
 from json import dumps
@@ -9,6 +9,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.core.exceptions import PermissionDenied
+
 
 import json
 import locale
@@ -129,6 +130,13 @@ def user(req, username):
         'labels_most_size': labels_size(sorted_by_size[:5]),
         'values_most_size': values_size(sorted_by_size)[:5],
     }
+    action = req.GET.get('action', '')
+    if action == 'raise403':
+        raise PermissionDenied
+    elif action == 'raise404':
+        raise Http404
+    elif action == 'raise500':
+        raise Exception('Server error')
 
     return render(req, 'user.html', context)
 
@@ -145,3 +153,11 @@ class ChartData(APIView):
             "default": default_items,
         }
         return Response(data)
+
+
+def response_error_handler(request, exception=None):
+    return HttpResponse('Error handler content', status=403)
+
+
+def permission_denied_view(request):
+    raise PermissionDenied
