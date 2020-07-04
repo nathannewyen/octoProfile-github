@@ -130,34 +130,5 @@ def user(req, username):
         'labels_most_size': labels_size(sorted_by_size[:5]),
         'values_most_size': values_size(sorted_by_size)[:5],
     }
-    action = req.GET.get('action', '')
-    if action == 'raise403':
-        raise PermissionDenied
-    elif action == 'raise404':
-        raise Http404
-    elif action == 'raise500':
-        raise Exception('Server error')
 
     return render(req, 'user.html', context)
-
-
-class ChartData(APIView):
-    authentication_classes = []
-    permission_classes = []
-
-    def get(self, request, format=None):
-        labels = ["Blue", "Yellow", "Green", "Purple", "Orange"]
-        default_items = []
-        data = {
-            "labels": labels,
-            "default": default_items,
-        }
-        return Response(data)
-
-
-def response_error_handler(request, exception=None):
-    return HttpResponse('Error handler content', status=403)
-
-
-def permission_denied_view(request):
-    raise PermissionDenied

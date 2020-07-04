@@ -68,14 +68,14 @@
             </div>
         </div>
 
-        <div class="content container-fluid">
+        <div class="content container">
             <div class="card-deck">
                 <div class="card shadow">
                     <div class="card-body">
                         <h4 class="card-title">Most Forked
                             <div class="line"></div>
                         </h4>
-                        <canvas id="myChart" height="220"></canvas>
+                        <canvas id="myChart" height="270"></canvas>
                     </div>
                 </div>
                 <div class="card shadow">
@@ -83,7 +83,7 @@
                         <h4 class="card-title">Most Starred
                             <div class="line"></div>
                         </h4>
-                        <canvas id="myChart2" height="220"></canvas>
+                        <canvas id="myChart2" height="270"></canvas>
                     </div>
                 </div>
                 <div class="card shadow">
@@ -91,7 +91,7 @@
                         <h4 class="card-title">Most Sizes
                             <div class="size-line"></div>
                         </h4>
-                        <canvas id="myChart3" height="220">
+                        <canvas id="myChart3" height="270">
                     </div>
                 </div>
             </div>
@@ -277,178 +277,148 @@
     </div>
 
 
-    <!-- Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
-
-
-
     <script>
-        var endpoint = '/api/chart/data/'
-        $.ajax({
-            method: "GET",
-            url: endpoint,
-            success: function (data) {
-                labels = data.labels
-                defaultData = data.default
-                setChart()
-            },
-            error: function (error_data) {
-                console.log("error")
-                console.log(error_data)
+        Chart.plugins.register({
+            beforeInit: function (chart) {
+                var data = chart.data.datasets[0].data;
+                var isAllZero = data.reduce((a, b) => a + b) > 0 ? false : true;
+                if (!isAllZero) return;
+                // when all data values are zero...
+                chart.data.datasets[0].data = data.map((e, i) => i > 0 ? 0 : 1); //add one segment
+                chart.data.datasets[0].backgroundColor = '#d2dee2'; //change bg color
+                chart.data.datasets[0].borderWidth = 0; //no border
+                chart.options.tooltips = false; //disable tooltips
+                chart.options.legend.onClick = null; //disable legend click
             }
-        })
+        });
 
-        function setChart() {
-            Chart.plugins.register({
-                beforeInit: function (chart) {
-                    var data = chart.data.datasets[0].data;
-                    var isAllZero = data.reduce((a, b) => a + b) > 0 ? false : true;
-                    if (!isAllZero) return;
-                    // when all data values are zero...
-                    chart.data.datasets[0].data = data.map((e, i) => i > 0 ? 0 : 1); //add one segment
-                    chart.data.datasets[0].backgroundColor = '#d2dee2'; //change bg color
-                    chart.data.datasets[0].borderWidth = 0; //no border
-                    chart.options.tooltips = false; //disable tooltips
-                    chart.options.legend.onClick = null; //disable legend click
-                }
-            });
-
-            let labels_most_forked = JSON.parse(`{{ labels_most_forked | safe}}`);
-            let values_most_forked = JSON.parse(`{{ values_most_forked | safe}}`);
-            var ctx = document.getElementById("myChart");
-            var myChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: labels_most_forked,
-                    datasets: [{
-                        label: '# of Votes',
-                        data: values_most_forked,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
+        let labels_most_forked = JSON.parse(`{{ labels_most_forked | safe}}`);
+        let values_most_forked = JSON.parse(`{{ values_most_forked | safe}}`);
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels_most_forked,
+                datasets: [{
+                    label: '# of Votes',
+                    data: values_most_forked,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(241, 224, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(241, 224, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: false,
+                legend: {
+                    position: 'right',
+                    fontSize: 10,
+                },
+            },
+        });
+        let data_labels = JSON.parse(`{{ labels_chart | safe}}`);
+        let value_chart = JSON.parse("{{value_chart|escapejs}}");
+        var ctx = document.getElementById("myChart2").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data_labels,
+                datasets: [{
+                    label: '# of Starred',
+                    data: value_chart,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(241, 224, 90, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(241, 224, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
                     }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    legend: {
-                        position: 'right',
-                    },
+                legend: {
+                    display: false,
                 },
-            });
-            let data_labels = JSON.parse(`{{ labels_chart | safe}}`);
-            let value_chart = JSON.parse("{{value_chart|escapejs}}");
-            var ctx2 = document.getElementById("myChart2");
-            var myChart = new Chart(ctx2, {
-                type: 'bar',
-                data: {
-                    labels: data_labels,
-                    datasets: [{
-                        label: '# of Starred',
-                        data: value_chart,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.8)',
-                            'rgba(54, 162, 235, 0.8)',
-                            'rgba(255, 206, 86, 0.8)',
-                            'rgba(75, 192, 192, 0.8)',
-                            'rgba(153, 102, 255, 0.8)',
-                            'rgba(255, 159, 64, 0.8)'
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    },
-                    legend: {
-                        display: false,
-                    },
-                    tooltips: {
-                        callbacks: {
-                            label: function (tooltipItem) {
-                                return tooltipItem.yLabel;
-                            }
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem) {
+                            return tooltipItem.yLabel;
                         }
                     }
                 }
-            });
+            }
+        });
 
-            let labels_most_size = JSON.parse(`{{ labels_most_size | safe}}`);
-            let values_most_size = JSON.parse(`{{ values_most_size | safe}}`);
-            var ctx3 = document.getElementById("myChart3");
-            var myChart = new Chart(ctx3, {
-                type: 'doughnut',
-                data: {
-                    labels: labels_most_size,
-                    datasets: [{
-                        label: '# of Votes',
-                        data: values_most_size,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
+        let labels_most_size = JSON.parse(`{{ labels_most_size | safe}}`);
+        let values_most_size = JSON.parse(`{{ values_most_size | safe}}`);
+        var ctx = document.getElementById("myChart3").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels_most_size,
+                datasets: [{
+                    label: '# of Votes',
+                    data: values_most_size,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(241, 224, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(241, 224, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                legend: {
+                    position: 'right',
+                    verticalAlign: 'top',
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    legend: {
-                        position: 'right',
-                        verticalAlign: 'top',
-                    },
-                }
-            });
-        }
+            }
+        });
 
         $(document).ready(function () {
             $(".stars").show();
@@ -472,6 +442,16 @@
                 }
             });
         });
+    </script>
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
 </body>
 
