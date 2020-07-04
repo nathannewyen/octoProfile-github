@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from django.core.exceptions import PermissionDenied
 
 import json
+import locale
 import datetime
 import ssl
 
@@ -77,11 +78,37 @@ def user(req, username):
 
     sorted_by_forks.sort(key=sort_user_repo_by_forks, reverse=True)
 
+    def labels_fork(sorted_by_forks):
+        labels_most_forked = []
+        for i in sorted_by_forks:
+            labels_most_forked.append(i['name'])
+        labels_fork_json = json.dumps(labels_most_forked)
+        return labels_fork_json
+
+    def values_fork(sorted_by_forks):
+        values_most_forked = []
+        for i in sorted_by_forks:
+            values_most_forked.append(i['forks'])
+        return values_most_forked
+
     # Sorted by size
     def sort_user_repo_by_size(sorted_by_size):
         return sorted_by_size['size']
 
     sorted_by_size.sort(key=sort_user_repo_by_size, reverse=True)
+
+    def labels_size(sorted_by_size):
+        labels_most_size = []
+        for i in sorted_by_size:
+            labels_most_size.append(i['name'])
+        labels_size_json = json.dumps(labels_most_size)
+        return labels_size_json
+
+    def values_size(sorted_by_size):
+        values_most_size = []
+        for i in sorted_by_size:
+            values_most_size.append(i['size'])
+        return values_most_size
 
     created_at = data['created_at']
     created_at = datetime.datetime.strptime(created_at, "%Y-%m-%dT%H:%M:%SZ")
@@ -97,6 +124,10 @@ def user(req, username):
         'sorted_by_size': sorted_by_size[:8],
         'value_chart': value_chart(sorted_by_stars)[:5],
         'labels_chart': labels_chart(sorted_by_stars[:5]),
+        'labels_most_forked': labels_fork(sorted_by_forks[:5]),
+        'values_most_forked': values_fork(sorted_by_forks)[:5],
+        'labels_most_size': labels_size(sorted_by_size[:5]),
+        'values_most_size': values_size(sorted_by_size)[:5],
     }
 
     return render(req, 'user.html', context)

@@ -71,9 +71,6 @@ ul li .sub {
     margin-top: 30px;
 }
 
-.content p {
-    padding: 20px;
-}
 
 .card .line {
     border-top: 2px dashed #d1d5d9;
@@ -84,9 +81,10 @@ ul li .sub {
     margin-bottom: 3px;
 }
 
-.card-text {
+canvas {
     margin-top: 10px;
 }
+
 
 .top-repo {
     margin-top: 30px;

@@ -37,15 +37,16 @@
         })
 
         function setChart() {
-            let y = [10, 3, 5, 9, 1];
+            let labels_most_forked = JSON.parse(`{{ labels_most_forked | safe}}`);
+            let values_most_forked = JSON.parse(`{{ values_most_forked | safe}}`);
             var ctx = document.getElementById("myChart");
             var myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: labels,
+                    labels: labels_most_forked,
                     datasets: [{
                         label: '# of Votes',
-                        data: y,
+                        data: values_most_forked,
                         backgroundColor: [
                             'rgba(255, 99, 132, 1)',
                             'rgba(54, 162, 235, 1)',
@@ -66,14 +67,13 @@
                     }]
                 },
                 options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
+                    legend: {
+                        position: 'right'
                     }
-                }
+                },
+                tooltips: {
+                    mode: 'label'
+                },
             });
             let data_labels = JSON.parse(`{{ labels_chart | safe}}`);
             let value_chart = JSON.parse("{{value_chart|escapejs}}");
@@ -111,19 +111,30 @@
                                 beginAtZero: true
                             }
                         }]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                return tooltipItem.yLabel;
+                            }
+                        }
                     }
                 }
             });
 
-
+            let labels_most_size = JSON.parse(`{{ labels_most_size | safe}}`);
+            let values_most_size = JSON.parse(`{{ values_most_size | safe}}`);
             var ctx3 = document.getElementById("myChart3");
             var myChart = new Chart(ctx3, {
                 type: 'doughnut',
                 data: {
-                    labels: labels,
+                    labels: labels_most_size,
                     datasets: [{
                         label: '# of Votes',
-                        data: defaultData,
+                        data: values_most_size,
                         backgroundColor: [
                             'rgba(255, 99, 132, 1)',
                             'rgba(54, 162, 235, 1)',
@@ -144,13 +155,9 @@
                     }]
                 },
                 options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
+                    legend: {
+                        position: 'right',
+                    },
                 }
             });
         }
@@ -207,27 +214,23 @@
             <div class="card-deck">
                 <div class="card shadow">
                     <div class="card-body">
-                        <h4 class="card-title">Top Languages</h4>
+                        <h4 class="card-title">Most Forked</h4>
                         <div class="line"></div>
-                        <p class="card-text">
-                            <canvas id="myChart" width="150" height="150"></canvas>
-                        </p>
+                        <canvas id="myChart"></canvas>
                     </div>
                 </div>
                 <div class="card shadow">
                     <div class="card-body">
                         <h4 class="card-title">Most Starred</h4>
                         <div class="line"></div>
-                        <p class="card-text"><canvas id="myChart2" width="150" height="150"></canvas></p>
+                        <canvas id="myChart2" width="150" height="150"></canvas>
                     </div>
                 </div>
                 <div class="card shadow">
                     <div class="card-body">
-                        <h4 class="card-title">Stars per Language
-                        </h4>
+                        <h4 class="card-title">Most sizes</h4>
                         <div class="line"></div>
-                        <p class="card-text"><canvas id="myChart3" width="150" height="150">
-                        </p>
+                        <canvas id="myChart3" width="150" height="150">
                     </div>
                 </div>
             </div>
@@ -403,9 +406,13 @@
     </div>
 
     <div class="footer text-center container">
-        <p>Built with <a href="">Python</a> · <a href="">Chart.js</a> · <a href="">GitHub</a> · <a href="">Django</a>
-            and
-            more!</p>
+        <p>Built with
+            <a href="https://www.python.org/" target="_blank">Python</a> ·
+            <a href="https://www.chartjs.org/" target="_blank">Chart.js</a> ·
+            <a href="https://github.com/nathannewyen/octoProfile-github" target="_blank">GitHub</a> ·
+            <a href="https://www.djangoproject.com/" target="_blank">Django</a>
+            and more!
+        </p>
     </div>
 
 
