@@ -68,31 +68,29 @@
             </div>
         </div>
 
-        <div class="content container">
-            <div class="card-deck charts">
-                <div class="card shadow chart">
-                    <div class="card-body">
-                        <h4 class="card-title">Most Forked
-                            <div class="line"></div>
-                        </h4>
-                        <canvas id="myChart" width="270" height="270"></canvas>
-                    </div>
+        <div class="content container-fluid">
+            <div class="card shadow chart d-inline-block">
+                <div class="card-body">
+                    <h4 class="card-title">Most Forked
+                        <div class="line"></div>
+                    </h4>
+                    <canvas id="myChart" height="200"></canvas>
                 </div>
-                <div class="card shadow chart">
-                    <div class="card-body">
-                        <h4 class="card-title">Most Starred
-                            <div class="line"></div>
-                        </h4>
-                        <canvas id="myChart2" width="270" height="270"></canvas>
-                    </div>
+            </div>
+            <div class="card shadow chart d-inline-block">
+                <div class="card-body">
+                    <h4 class="card-title">Most Starred
+                        <div class="line"></div>
+                    </h4>
+                    <canvas id="myChart2" height="230"></canvas>
                 </div>
-                <div class="card shadow chart">
-                    <div class="card-body">
-                        <h4 class="card-title">Most Sizes
-                            <div class="size-line"></div>
-                        </h4>
-                        <canvas id="myChart3" width="270" height="270">
-                    </div>
+            </div>
+            <div class="card shadow chart d-inline-block">
+                <div class="card-body">
+                    <h4 class="card-title">Most Sizes
+                        <div class="size-line"></div>
+                    </h4>
+                    <canvas id="myChart3" height="200">
                 </div>
             </div>
         </div>
@@ -278,15 +276,6 @@
 
 
     <script>
-        if ($(window).width() <= 768) {
-            $(".content").removeClass("container")
-            $(".charts").removeClass("card-deck");
-        } else {
-            $(".content").addClass("container")
-            $(".charts").addClass("card-deck");
-        }
-
-
         Chart.plugins.register({
             beforeInit: function (chart) {
                 var data = chart.data.datasets[0].data;
@@ -336,6 +325,7 @@
                 responsive: true,
                 legend: {
                     position: 'right',
+                    align: 'start',
                     labels: {
                         fontSize: 10,
                     }
@@ -428,6 +418,7 @@
                 maintainAspectRatio: true,
                 legend: {
                     position: 'right',
+                    align: 'start',
                     verticalAlign: 'top',
                 },
             }

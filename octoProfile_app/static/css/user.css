@@ -7,7 +7,7 @@ body {
   background-color: #f5f8fa !important;
 }
 
-@media (min-width: 1300px) {
+@media (min-width: 2200px) {
   .corner h4 {
     font-size: 20px;
     color: #6a737d;
@@ -28,7 +28,7 @@ body {
   .header {
     background-color: #1b1f22;
     color: white;
-    height: 50vh;
+    height: 50%;
   }
 
   .username {
@@ -55,6 +55,7 @@ body {
     padding: 15px 30px;
     background-color: #242a2e;
     border-radius: 5px;
+    margin-bottom: 30px;
   }
 
   ul li .main {
@@ -68,11 +69,9 @@ body {
 
   /* Content */
 
-
   .content {
-    position: absolute;
-    top: 40%;
-    left: 28%;
+    width: 75vw;
+    margin-top: 30px;
   }
 
   .card .line {
@@ -91,8 +90,8 @@ body {
 
   canvas {
     font-size: 10px;
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 10px;
   }
 
   .top-repo {
@@ -154,11 +153,192 @@ body {
   }
 
   .repos {
-    margin-top: 300px;
+    margin-top: 30px;
   }
 
   .repo-info p {
     margin-top: 50px;
+  }
+
+  /* Footer */
+  .footer {
+    margin: 50px auto;
+  }
+
+  .footer p {
+    font-size: 14px;
+    color: #6a737d;
+  }
+
+  .footer a {
+    font-size: 12px;
+    color: #0070f3;
+  }
+}
+
+
+@media (min-width: 1300px) {
+  .corner h4 {
+    font-size: 20px;
+    color: #6a737d;
+    font-weight: 400;
+  }
+
+  .corner div {
+    font-size: 10px;
+    color: #6a737d;
+    font-weight: 300;
+  }
+
+  .corner {
+    padding: 15px;
+    letter-spacing: 1px;
+  }
+
+  .header {
+    background-color: #1b1f22;
+    color: white;
+    height: 50%;
+  }
+
+  .username {
+    font-family: "Space Mono", monospace;
+    font-size: 24px;
+  }
+
+  .profile {
+    letter-spacing: 1px;
+  }
+
+  img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 8px solid;
+    margin-bottom: 20px;
+  }
+
+  ul li {
+    margin-top: 30px;
+    list-style: none;
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #242a2e;
+    border-radius: 5px;
+    margin-bottom: 30px;
+  }
+
+  ul li .main {
+    font-size: 24px;
+  }
+
+  ul li .sub {
+    font-size: 12px;
+    color: rgba(200, 225, 255, 0.7);
+  }
+
+  /* Content */
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content .card {
+    min-width: 350px !important;
+    margin: 10px;
+  }
+
+
+  .content .chart {
+    height: 350px;
+  }
+
+  .card .line {
+    border-top: 2px dashed #d1d5d9;
+    width: 150px !important;
+  }
+
+  .card .size-line {
+    border-top: 2px dashed #d1d5d9;
+    width: 120px !important;
+  }
+
+  .card-title {
+    margin-bottom: 3px;
+  }
+
+  canvas {
+    font-size: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .top-repo {
+    margin-top: 30px;
+    margin-left: 10px;
+  }
+
+  .top-repo label {
+    font-size: 28px;
+    font-weight: 500;
+    display: inline-block;
+    width: 200px;
+    margin-left: 3%;
+  }
+
+  .top-repo span {
+    font-size: 16px;
+    color: #6a737d;
+    font-weight: 400;
+  }
+
+  .top-repo select {
+    width: 100px;
+    display: inline-block;
+    background-color: #f5f8fa !important;
+    border: 1px solid #cce0fb;
+  }
+
+  .top-repo h4 {
+    font-family: "Space Mono", monospace;
+  }
+
+  .repos .card {
+    padding: 15px;
+    min-height: 200px;
+    display: inline-block;
+    width: 350px;
+    margin: 20px;
+  }
+
+  .repos .card-title span {
+    font-size: 14px;
+  }
+
+  .repos .repo-info h4 {
+    font-size: 20px;
+  }
+
+
+  .repos a {
+    text-decoration: none;
+  }
+
+  .repos p {
+    font-weight: 400;
+    font-size: 13px;
+
+    color: #6a737d;
+  }
+
+  .repos {
+    margin-top: 30px;
+  }
+
+  .repo-info p {
+    margin-top: 70px;
   }
 
   /* Footer */
@@ -240,8 +420,9 @@ body {
 
   /* Content */
 
-  .content .card-deck .chart {
-    margin-top: 30px;
+  .content .chart {
+    margin: 20px;
+    min-height: 350px !important;
   }
 
   .card .line {
@@ -299,7 +480,7 @@ body {
     padding: 15px;
     min-height: 160px;
     display: inline-block;
-    width: 450px;
+    width: 350px;
     margin: 20px;
   }
 
@@ -406,9 +587,8 @@ body {
   /* Content */
 
   .content .chart {
-    margin: 30px auto;
-    width: 400px;
-    height: 400px;
+    margin: 10px;
+    min-height: 350px;
   }
 
 
@@ -428,8 +608,8 @@ body {
 
   canvas {
     font-size: 10px;
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-bottom: 10px;
   }
 
   .top-repo {
@@ -543,7 +723,7 @@ body {
 
   .username {
     font-family: "Space Mono", monospace;
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .profile {
@@ -558,18 +738,18 @@ body {
     margin-bottom: 10px;
   }
 
+
   ul li {
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin: 10px 0px 30px 0px;
     list-style: none;
     display: inline-block;
-    padding: 15px 30px;
+    padding: 10px;
     background-color: #242a2e;
     border-radius: 5px;
   }
 
   ul li .main {
-    font-size: 24px;
+    font-size: 18px;
   }
 
   ul li .sub {
@@ -594,8 +774,8 @@ body {
   }
 
   canvas {
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-bottom: 10px;
   }
 
   .top-repo {

@@ -1,13 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&display=swap');
 
 body {
-    text-align: center;
     background-color: #1F2427;
     color: white;
     font-family: 'Inter', sans-serif;
 }
 
+.corner h4 {
+    font-size: 20px;
+    color: #6a737d;
+    font-weight: 400;
+}
+
+.corner div {
+    font-size: 10px;
+    color: #6a737d;
+    font-weight: 300;
+}
+
+.corner {
+    padding: 15px;
+    letter-spacing: 1px;
+}
+
 .wrapper {
+    text-align: center;
     margin-top: 30vh;
 }
 
@@ -29,4 +46,15 @@ input {
     font-size: 22px !important;
     text-align: center;
     letter-spacing: 1px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    margin: 10px;
+    width: 300px;
 }

@@ -132,3 +132,20 @@ def user(req, username):
     }
 
     return render(req, 'user.html', context)
+
+
+def bad_request(req, exception):
+    context = {}
+    return render(req, '400.html', context, status=400)
+
+
+def permission_denied(req, exception):
+    return render(req, '403.html', status=403)
+
+
+def page_not_found(req, exception):
+    return render(req, '404.html', status=404)
+
+
+def server_error(request):
+    return render(request, '500.html', status=500)
