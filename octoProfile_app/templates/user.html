@@ -69,38 +69,38 @@
         </div>
 
         <div class="content container">
-            <div class="card-deck">
-                <div class="card shadow">
+            <div class="card-deck charts">
+                <div class="card shadow chart">
                     <div class="card-body">
                         <h4 class="card-title">Most Forked
                             <div class="line"></div>
                         </h4>
-                        <canvas id="myChart" height="270"></canvas>
+                        <canvas id="myChart" width="270" height="270"></canvas>
                     </div>
                 </div>
-                <div class="card shadow">
+                <div class="card shadow chart">
                     <div class="card-body">
                         <h4 class="card-title">Most Starred
                             <div class="line"></div>
                         </h4>
-                        <canvas id="myChart2" height="270"></canvas>
+                        <canvas id="myChart2" width="270" height="270"></canvas>
                     </div>
                 </div>
-                <div class="card shadow">
+                <div class="card shadow chart">
                     <div class="card-body">
                         <h4 class="card-title">Most Sizes
                             <div class="size-line"></div>
                         </h4>
-                        <canvas id="myChart3" height="270">
+                        <canvas id="myChart3" width="270" height="270">
                     </div>
                 </div>
             </div>
         </div>
         <div class="repos container-fluid">
             <div class="top-repo justify-content-around">
-                <label for="top-repos" class="col-sm-3 col-form-label">Top
+                <label for="top-repos" class="col-sm-4 col-form-label">Top
                     Repos <span>by </span></label>
-                <select class="custom-select bg-light text-primary" id="type" name="shuffle-filter" checked="checked">
+                <select class="custom-select bg-light text-primary" id="type">
                     <option selected="stars">stars</option>
                     <option value="forks">forks</option>
                     <option value="size">size</option>
@@ -220,7 +220,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title" style="font-family: 'Space Mono', monospace;">
                                         <span><i class="fal fa-book"></i></span> {{repo.name}}</h4>
-                                    <p class="card-text clearfix">
+                                    <p class="card-text lang clearfix">
 
                                         <!-- Color -->
                                         {% if repo.language == "HTML" %}
@@ -278,6 +278,15 @@
 
 
     <script>
+        if ($(window).width() <= 768) {
+            $(".content").removeClass("container")
+            $(".charts").removeClass("card-deck");
+        } else {
+            $(".content").addClass("container")
+            $(".charts").addClass("card-deck");
+        }
+
+
         Chart.plugins.register({
             beforeInit: function (chart) {
                 var data = chart.data.datasets[0].data;
@@ -291,6 +300,7 @@
                 chart.options.legend.onClick = null; //disable legend click
             }
         });
+
 
         let labels_most_forked = JSON.parse(`{{ labels_most_forked | safe}}`);
         let values_most_forked = JSON.parse(`{{ values_most_forked | safe}}`);
@@ -318,14 +328,17 @@
                         'rgba(153, 102, 255, 1)',
                         'rgba(255, 159, 64, 1)'
                     ],
-                    borderWidth: 1
+                    borderWidth: 1,
+                    width: 300,
                 }]
             },
             options: {
-                responsive: false,
+                responsive: true,
                 legend: {
                     position: 'right',
-                    fontSize: 10,
+                    labels: {
+                        fontSize: 10,
+                    }
                 },
             },
         });
