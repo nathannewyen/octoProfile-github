@@ -74,15 +74,23 @@ body {
     margin-top: 30px;
   }
 
-  .card .line {
-    border-top: 2px dashed #d1d5d9;
-    width: 150px !important;
+  .content .card {
+    min-height: 450px;
   }
 
-  .card .size-line {
-    border-top: 2px dashed #d1d5d9;
-    width: 120px !important;
+  .content h4 {
+    padding: 5px 0px;
+    border-bottom: 2px dashed #d1d5d9;
+    width: 180px;
   }
+
+  .content .top-size {
+    padding: 5px 0px;
+    border-bottom: 2px dashed #d1d5d9;
+    width: 115px;
+  }
+
+
 
   .card-title {
     margin-bottom: 3px;
@@ -128,7 +136,7 @@ body {
     padding: 15px;
     min-height: 160px;
     display: inline-block;
-    width: 500px;
+    width: 550px !important;
     margin: 20px;
   }
 
@@ -177,7 +185,7 @@ body {
 }
 
 
-@media (min-width: 1300px) {
+@media (min-width: 1025px) {
   .corner h4 {
     font-size: 20px;
     color: #6a737d;
@@ -247,22 +255,22 @@ body {
 
   .content .card {
     min-width: 350px !important;
+    min-height: 450px;
     margin: 10px;
   }
 
 
-  .content .chart {
-    height: 350px;
+
+  .content h4 {
+    padding: 5px 0px;
+    border-bottom: 2px dashed #d1d5d9;
+    width: 180px;
   }
 
-  .card .line {
-    border-top: 2px dashed #d1d5d9;
-    width: 150px !important;
-  }
-
-  .card .size-line {
-    border-top: 2px dashed #d1d5d9;
-    width: 120px !important;
+  .content .top-size {
+    padding: 5px 0px;
+    border-bottom: 2px dashed #d1d5d9;
+    width: 115px;
   }
 
   .card-title {
@@ -422,17 +430,19 @@ body {
 
   .content .chart {
     margin: 20px;
-    min-height: 350px !important;
+    min-height: 450px !important;
   }
 
-  .card .line {
-    border-top: 2px dashed #d1d5d9;
-    width: 150px !important;
+  .content h4 {
+    padding: 5px 0px;
+    border-bottom: 2px dashed #d1d5d9;
+    width: 180px;
   }
 
-  .card .size-line {
-    border-top: 2px dashed #d1d5d9;
-    width: 120px !important;
+  .content .top-size {
+    padding: 5px 0px;
+    border-bottom: 2px dashed #d1d5d9;
+    width: 115px;
   }
 
   .card-title {
@@ -588,18 +598,20 @@ body {
 
   .content .chart {
     margin: 10px;
-    min-height: 350px;
+    min-height: 450px;
   }
 
 
-  .card .line {
-    border-top: 2px dashed #d1d5d9;
-    width: 150px !important;
+  .content h4 {
+    padding: 5px 0px;
+    border-bottom: 2px dashed #d1d5d9;
+    width: 180px;
   }
 
-  .card .size-line {
-    border-top: 2px dashed #d1d5d9;
-    width: 120px !important;
+  .content .top-size {
+    padding: 5px 0px;
+    border-bottom: 2px dashed #d1d5d9;
+    width: 115px;
   }
 
   .card-title {
@@ -759,14 +771,16 @@ body {
 
   /* Content */
 
-  .card .line {
-    border-top: 2px dashed #d1d5d9;
-    width: 150px !important;
+  .content h4 {
+    padding: 5px 0px;
+    border-bottom: 2px dashed #d1d5d9;
+    width: 180px;
   }
 
-  .card .size-line {
-    border-top: 2px dashed #d1d5d9;
-    width: 120px !important;
+  .content .top-size {
+    padding: 5px 0px;
+    border-bottom: 2px dashed #d1d5d9;
+    width: 115px;
   }
 
   .card-title {

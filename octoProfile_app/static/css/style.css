@@ -48,13 +48,6 @@ input {
     letter-spacing: 1px;
 }
 
-.content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .card {
-    margin: 10px;
-    width: 300px;
+    width: 300px !important;
 }

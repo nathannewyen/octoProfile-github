@@ -12,6 +12,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+
 
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
@@ -30,45 +32,99 @@
     </div>
 
 
-    <div class="container-fluid content">
-        <div class="card d-inline-block">
-            <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">
-                    Some quick example text to build on the card title
-                    and make up the bulk of the card's content.
-                </p>
-                <a href="#!" class="card-link">Card link</a>
-                <a href="#!" class="card-link">Another link</a>
-            </div>
-        </div>
-        <div class="card d-inline-block">
-            <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">
-                    Some quick example text to build on the card title
-                    and make up the bulk of the card's content.
-                </p>
-                <a href="#!" class="card-link">Card link</a>
-                <a href="#!" class="card-link">Another link</a>
-            </div>
-        </div>
-        <div class="card d-inline-block">
-            <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">
-                    Some quick example text to build on the card title
-                    and make up the bulk of the card's content.
-                </p>
-                <a href="#!" class="card-link">Card link</a>
-                <a href="#!" class="card-link">Another link</a>
-            </div>
-        </div>
 
+    <!-- Test -->
+    <div class="container">
+
+        <p>
+            <select class="filters-select">
+                <option selected value=".one">one</option>
+                <option value=".two">two</option>
+                <option value=".three">three</option>
+            </select>
+        </p>
+
+        <div class="card-deck text-dark" id="grid">
+            <div class="element-item one card">
+                <div class="card-body">
+                    <h4 class="card-title">1</h4>
+                </div>
+            </div>
+            <div class="element-item one card">
+                <div class="card-body">
+                    <h4 class="card-title">2</h4>
+                </div>
+            </div>
+            <div class="element-item one card">
+                <div class="card-body">
+                    <h4 class="card-title">3</h4>
+                </div>
+            </div>
+
+
+            <div class="element-item two card">
+                <div class="card-body">
+                    <h4 class="card-title">4</h4>
+                </div>
+            </div>
+
+            <div class="element-item two card">
+                <div class="card-body">
+                    <h4 class="card-title">5</h4>
+                </div>
+            </div>
+
+            <div class="element-item two card">
+                <div class="card-body">
+                    <h4 class="card-title">6</h4>
+                </div>
+            </div>
+
+            <div class="element-item three card">
+                <div class="card-body">
+                    <h4 class="card-title">7</h4>
+                </div>
+            </div>
+
+            <div class="element-item three card">
+                <div class="card-body">
+                    <h4 class="card-title">8</h4>
+                </div>
+            </div>
+
+            <div class="element-item three card">
+                <div class="card-body">
+                    <h4 class="card-title">9</h4>
+                </div>
+            </div>
+
+        </div>
     </div>
+
+    <script>
+        // init Isotope
+        var $grid = $('#grid').isotope({
+            itemSelector: '.element-item',
+        });
+        // filter functions
+        var filterFns = {
+            // show if name ends with -ium
+            ium: function () {
+                var name = $(this).find('.name').text();
+                return name.match(/ium$/);
+            }
+        };
+        // bind filter on select change
+        $('.filters-select').on('change', function () {
+            // get filter value from option value
+            var filterValue = this.value;
+            // use filterFn if matches value
+            filterValue = filterFns[filterValue] || filterValue;
+            $grid.isotope({
+                filter: filterValue
+            });
+        });
+    </script>
 
     <!-- Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

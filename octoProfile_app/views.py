@@ -82,7 +82,7 @@ def user(req, username):
     def labels_fork(sorted_by_forks):
         labels_most_forked = []
         for i in sorted_by_forks:
-            labels_most_forked.append(i['name'])
+            labels_most_forked.append(i['language'])
         labels_fork_json = json.dumps(labels_most_forked)
         return labels_fork_json
 
@@ -125,8 +125,8 @@ def user(req, username):
         'sorted_by_size': sorted_by_size[:8],
         'value_chart': value_chart(sorted_by_stars)[:5],
         'labels_chart': labels_chart(sorted_by_stars[:5]),
-        'labels_most_forked': labels_fork(sorted_by_forks[:5]),
-        'values_most_forked': values_fork(sorted_by_forks)[:5],
+        'labels_most_forked': labels_fork(sorted_by_forks),
+        'values_most_forked': values_fork(sorted_by_forks),
         'labels_most_size': labels_size(sorted_by_size[:5]),
         'values_most_size': values_size(sorted_by_size)[:5],
     }
@@ -135,8 +135,7 @@ def user(req, username):
 
 
 def bad_request(req, exception):
-    context = {}
-    return render(req, '400.html', context, status=400)
+    return render(req, '400.html', status=400)
 
 
 def permission_denied(req, exception):
