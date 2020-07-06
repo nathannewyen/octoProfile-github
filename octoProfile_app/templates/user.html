@@ -92,22 +92,27 @@
             <div class="top-repo justify-content-around">
                 <label for="top-repos" class="col-sm-4 col-form-label">Top
                     Repos <span>by </span></label>
-                <select class="custom-select bg-light text-primary" id="type">
-                    <option selected="stars">stars</option>
-                    <option value="forks">forks</option>
-                    <option value="size">size</option>
+                <select class="custom-select bg-light text-primary filters-select" id="type">
+                    <option selected value=".star-shuffle">stars</option>
+                    <option value=".fork-shuffle">forks</option>
+                    <option value=".size-shuffle">size</option>
                 </select>
             </div>
-            <div class="repo-info grid">
+            <div class="repo-info" id="grid">
                 <!-- Sort by stars -->
-                <div class="element-item stars" data-category="stars">
+                <div class="stars">
                     <div class="card-deck justify-content-center">
                         {% for repo in sorted_by_stars %}
                         <a href="{{repo.html_url}}" class="text-dark" target="_blank">
-                            <div class="card shadow">
+                            <div class="card shadow element-item star-shuffle">
                                 <div class="card-body">
                                     <h4 class="card-title" style="font-family: 'Space Mono', monospace;">
                                         <span><i class="fal fa-book"></i></span> {{repo.name}}</h4>
+                                        {% if repo.description %}
+                                        <p class="card-text">{{repo.description}}</p>
+                                        {% else %}
+                                        <p class="card-text">No description</p>
+                                        {% endif %}
                                     <p class="card-text clearfix " style="word-spacing: 6px;">
 
                                         <!-- Color -->
@@ -156,11 +161,16 @@
                     <div class="card-deck justify-content-center">
                         {% for repo in sorted_by_forks %}
                         <a href="{{repo.html_url}}" class="text-dark" target="_blank">
-                            <div class="card shadow element-item" data-category="forks">
+                            <div class="card shadow element-item fork-shuffle">
                                 <div class="card-body">
                                     <h4 class="card-title" style="font-family: 'Space Mono', monospace;">
                                         <span><i class="fal fa-book"></i></span> {{repo.name}}</h4>
-                                    <p class="card-text clearfix">
+                                        {% if repo.description %}
+                                        <p class="card-text">{{repo.description}}</p>
+                                        {% else %}
+                                        <p class="card-text">No description</p>
+                                        {% endif %}
+                                    <p class="card-text clearfix" style="word-spacing: 6px;">
 
                                         <!-- Color -->
                                         {% if repo.language == "HTML" %}
@@ -208,11 +218,16 @@
                     <div class="card-deck justify-content-center">
                         {% for repo in sorted_by_size %}
                         <a href="{{repo.html_url}}" class="text-dark" target="_blank">
-                            <div class="card shadow element-item" data-category="size">
+                            <div class="card shadow element-item size-shuffle">
                                 <div class="card-body">
                                     <h4 class="card-title" style="font-family: 'Space Mono', monospace;">
                                         <span><i class="fal fa-book"></i></span> {{repo.name}}</h4>
-                                    <p class="card-text lang clearfix">
+                                        {% if repo.description %}
+                                        <p class="card-text">{{repo.description}}</p>
+                                        {% else %}
+                                        <p class="card-text">No description</p>
+                                        {% endif %}
+                                    <p class="card-text lang clearfix" style="word-spacing: 6px;">
 
                                         <!-- Color -->
                                         {% if repo.language == "HTML" %}
@@ -271,9 +286,11 @@
 
     <script>
         // init Isotope
-        var $grid = $('.grid').isotope({
+        var $grid = $('#grid').isotope({
             itemSelector: '.element-item',
-            layoutMode: 'fitRows'
+            layoutMode: 'masonry',
+            percentPosition: true,
+            filter: '.star-shuffle',
         });
         // filter functions
         var filterFns = {
@@ -320,7 +337,6 @@
         let sum_python = 0
         let sum_others = 0
 
-        console.log(labels_most_forked)
 
         for (let i of labels_most_forked) {
             if (i == 'HTML') {
@@ -339,8 +355,6 @@
                 sum_others += 1
             }
         }
-
-        console.log(sum_html, sum_css, sum_javascript, sum_ruby, sum_typescript, sum_python, sum_others)
 
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart = new Chart(ctx, {
@@ -424,14 +438,10 @@
                 },
                 legend: {
                     display: false,
-                },
-                tooltips: {
-                    callbacks: {
-                        label: function (tooltipItem) {
-                            return tooltipItem.yLabel;
-                        }
+                    labels: {
+                        fontSize: 10,
                     }
-                }
+                },
             }
         });
 
@@ -471,31 +481,11 @@
                     position: 'right',
                     align: 'start',
                     verticalAlign: 'top',
+                    labels: {
+                        fontSize: 10,
+                    }
                 },
             }
-        });
-
-        $(document).ready(function () {
-            $(".stars").show();
-            $(".forks").hide();
-            $(".size").hide();
-
-            $("#type").change(function () {
-                var val = $(this).val();
-                if (val == "stars") {
-                    $(".stars").show();
-                    $(".forks").hide()
-                    $(".size").hide();
-                } else if (val == "forks") {
-                    $(".stars").hide();
-                    $(".forks").show();
-                    $(".size").hide();
-                } else if (val == "size") {
-                    $(".stars").hide();
-                    $(".forks").hide();
-                    $(".size").show();
-                }
-            });
         });
     </script>
     <!-- Bootstrap -->

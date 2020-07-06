@@ -1,53 +1,103 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&display=swap');
 
-body {
-    background-color: #1F2427;
-    color: white;
-    font-family: 'Inter', sans-serif;
+@media (min-width: 521px) {
+    body {
+        background-color: #1F2427;
+        color: white;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .corner h4 {
+        font-size: 20px;
+        color: #6a737d;
+        font-weight: 400;
+    }
+
+    .corner div {
+        font-size: 10px;
+        color: #6a737d;
+        font-weight: 300;
+    }
+
+    .corner {
+        padding: 15px;
+        letter-spacing: 1px;
+    }
+
+    .wrapper {
+        text-align: center;
+        margin-top: 30vh;
+    }
+
+    i {
+        font-size: 65px;
+    }
+
+    h1 {
+        margin-top: 20px;
+        font-weight: 400;
+    }
+
+    input {
+        margin: 20px auto;
+        width: 500px !important;
+        padding: 30px !important;
+        background-color: #26313C !important;
+        color: #78B7FF !important;
+        font-size: 22px !important;
+        text-align: center;
+        letter-spacing: 1px;
+    }
 }
 
-.corner h4 {
-    font-size: 20px;
-    color: #6a737d;
-    font-weight: 400;
-}
+@media (max-width:520px) {
+    body {
+        background-color: #1F2427;
+        color: white;
+        padding: 10px;
+        font-family: 'Inter', sans-serif;
+    }
 
-.corner div {
-    font-size: 10px;
-    color: #6a737d;
-    font-weight: 300;
-}
+    .corner h4 {
+        font-size: 18px;
+        color: #6a737d;
+        font-weight: 400;
+    }
 
-.corner {
-    padding: 15px;
-    letter-spacing: 1px;
-}
+    .corner div {
+        font-size: 10px;
+        color: #6a737d;
+        font-weight: 300;
+    }
 
-.wrapper {
-    text-align: center;
-    margin-top: 30vh;
-}
+    .corner {
+        padding: 15px;
+        letter-spacing: 1px;
+    }
 
-i {
-    font-size: 65px;
-}
+    .wrapper {
+        text-align: center;
+        margin-top: 30vh;
+    }
 
-h1 {
-    margin-top: 20px;
-    font-weight: 400;
-}
+    i {
+        font-size: 65px;
+    }
 
-input {
-    margin: 20px auto;
-    width: 500px !important;
-    padding: 30px !important;
-    background-color: #26313C !important;
-    color: #78B7FF !important;
-    font-size: 22px !important;
-    text-align: center;
-    letter-spacing: 1px;
-}
+    h1 {
+        margin-top: 20px;
+        font-weight: 400;
+        font-size: 20px;
+    }
 
-.card {
-    width: 300px !important;
+    input {
+        margin: 20px auto;
+        width: 400px;
+        padding: 30px !important;
+        background-color: #26313C !important;
+        color: #78B7FF !important;
+        font-size: 20px !important;
+        text-align: center;
+        letter-spacing: 1px;
+    }
 }
