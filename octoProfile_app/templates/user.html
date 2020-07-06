@@ -107,12 +107,12 @@
                             <div class="card shadow element-item star-shuffle">
                                 <div class="card-body">
                                     <h4 class="card-title" style="font-family: 'Space Mono', monospace;">
-                                        <span><i class="fal fa-book"></i></span> {{repo.name}}</h4>
-                                        {% if repo.description %}
-                                        <p class="card-text">{{repo.description}}</p>
-                                        {% else %}
-                                        <p class="card-text">No description</p>
-                                        {% endif %}
+                                        <span><i class="fal fa-book"></i></span> {{repo.name | truncatechars:14}}</h4>
+                                    {% if repo.description %}
+                                    <p class="card-text">{{repo.description}}</p>
+                                    {% else %}
+                                    <p class="card-text">No description</p>
+                                    {% endif %}
                                     <p class="card-text clearfix " style="word-spacing: 6px;">
 
                                         <!-- Color -->
@@ -164,12 +164,12 @@
                             <div class="card shadow element-item fork-shuffle">
                                 <div class="card-body">
                                     <h4 class="card-title" style="font-family: 'Space Mono', monospace;">
-                                        <span><i class="fal fa-book"></i></span> {{repo.name}}</h4>
-                                        {% if repo.description %}
-                                        <p class="card-text">{{repo.description}}</p>
-                                        {% else %}
-                                        <p class="card-text">No description</p>
-                                        {% endif %}
+                                        <span><i class="fal fa-book"></i></span> {{repo.name | truncatechars:14}}</h4>
+                                    {% if repo.description %}
+                                    <p class="card-text">{{repo.description}}</p>
+                                    {% else %}
+                                    <p class="card-text">No description</p>
+                                    {% endif %}
                                     <p class="card-text clearfix" style="word-spacing: 6px;">
 
                                         <!-- Color -->
@@ -221,12 +221,12 @@
                             <div class="card shadow element-item size-shuffle">
                                 <div class="card-body">
                                     <h4 class="card-title" style="font-family: 'Space Mono', monospace;">
-                                        <span><i class="fal fa-book"></i></span> {{repo.name}}</h4>
-                                        {% if repo.description %}
-                                        <p class="card-text">{{repo.description}}</p>
-                                        {% else %}
-                                        <p class="card-text">No description</p>
-                                        {% endif %}
+                                        <span><i class="fal fa-book"></i></span> {{repo.name | truncatechars:14}}</h4>
+                                    {% if repo.description %}
+                                    <p class="card-text">{{repo.description}}</p>
+                                    {% else %}
+                                    <p class="card-text">No description</p>
+                                    {% endif %}
                                     <p class="card-text lang clearfix" style="word-spacing: 6px;">
 
                                         <!-- Color -->

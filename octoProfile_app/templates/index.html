@@ -30,6 +30,15 @@
             <input name="username" type="text" class="form-control border-0" placeholder="Enter your github username" />
         </form>
     </div>
+
+
+    <script>
+        function truncate(str, n) {
+            return (str.length > n) ? str.substr(0, n - 1) + '...' : str;
+        };
+
+        console.log(truncate('CSS-Assignment-Portfolio', 10))
+    </script>
     <!-- Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">

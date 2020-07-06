@@ -101,7 +101,9 @@ def user(req, username):
     def labels_size(sorted_by_size):
         labels_most_size = []
         for i in sorted_by_size:
-            labels_most_size.append(i['name'])
+            name_label = (i['name'][:7] +
+                          '...') if len(i['name']) > 10 else i['name']
+            labels_most_size.append(name_label)
         labels_size_json = json.dumps(labels_most_size)
         return labels_size_json
 
