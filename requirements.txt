@@ -5,7 +5,7 @@ bs4==0.0.1
 certifi==2020.6.20
 chardet==3.0.4
 distlib==0.3.1
-Django==2.2.4
+Django==2.2.21
 django-chartjs==2.1.0
 django-npm==1.0.0
 djangorestframework==3.11.0
